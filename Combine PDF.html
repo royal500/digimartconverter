@@ -1,0 +1,124 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Studio1 Design's Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="">
+    <header class="flex justify-between items-center p-4 bg-black">
+      <div class="flex items-center" style="margin-left: 25px">
+        <img
+          alt="Institute of Reading Development Logo"
+          class="h-11"
+          style="height: 60px; width: 60px"
+          src="images-removebg-preview.png"
+        />
+      </div>
+
+      <div class="flex items-center space-x-4 bg-black">
+        <a class="bg-pink-500 text-white px-4 py-2 rounded-full" href="#">
+          Animation
+        </a>
+      </div>
+    </header>
+    <main class="text-center py-16 bg-black text-white">
+      <h1 class="text-4xl md:text-5xl font-bold">
+        File Conversion and PDF Tools and Animation
+      </h1>
+      <h2 class="text-3xl font-bold mb-4">
+        Combine multiple PDF or image file to a single PDF
+      </h2>
+      <p class="mb-8">
+        Need to turn your multiple pdf into a single PDF document? You're in the
+        right place!
+      </p>
+    </main>
+    <section class="bg-black text-white py-6">
+      <div class="flex flex-wrap justify-center space-x-2">
+        <button
+          class="bg-dark text-white border border-pink-500 px-10 py-2 rounded-full"
+        >
+          Home
+        </button>
+        <button
+          class="bg-white text-dark border border-pink-500 px-4 py-2 rounded-full"
+        >
+          <a href="Combine PDF.html">Conbine PDF</a>
+        </button>
+        <button
+          class="bg-black text-white border border-pink-500 px-10 py-2 rounded-full"
+        >
+          <a href="PDFtoDOC.html">PDF to DOC</a>
+        </button>
+        <button
+          class="bg-dark text-white border border-pink-500 px-4 py-2 rounded-full"
+        >
+          <a href="DOCtoPDF.html">DOC to PDF</a>
+        </button>
+
+        <button
+          class="bg-black text-white border border-pink-500 px-4 py-2 rounded-full"
+        >
+          <a href="PDFtoJPG.html"> PDF to JPG</a>
+        </button>
+
+        <button
+          class="bg-black text-white border border-pink-500 px-4 py-2 rounded-full"
+        >
+          <a href="PNG to PDF.html">PNG to PDF</a>
+        </button>
+      </div>
+    </section>
+
+    <main class="container mx-auto p-4">
+      <section class="bg-white p-6 rounded shadow-md">
+        <h2 class="text-xl font-bold mb-4">Combine PDF or Image Files</h2>
+        <form class="space-y-4">
+          <div>
+            <label for="files" class="block text-sm font-medium text-gray-700"
+              >Upload Files</label
+            >
+            <input
+              type="file"
+              id="files"
+              name="files"
+              multiple
+              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            />
+          </div>
+          <button
+            type="submit"
+            class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
+          >
+            Combine Files
+          </button>
+        </form>
+      </section>
+
+      <section class="mt-8 bg-white p-6 rounded shadow-md">
+        <h2 class="text-xl font-bold mb-4">How to Use</h2>
+        <ol class="list-decimal list-inside space-y-2">
+          <li>
+            Select the PDF or image files you want to combine by clicking the
+            "Upload Files" button.
+          </li>
+          <li>After selecting the files, click the "Combine Files" button.</li>
+          <li>
+            Wait for the process to complete and download the combined PDF file.
+          </li>
+        </ol>
+      </section>
+    </main>
+
+    <footer class="bg-blue-600 text-white p-4 mt-8">
+      <div class="container mx-auto text-center">
+        <p>&copy; 2023 PDF Combiner. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

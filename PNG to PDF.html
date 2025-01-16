@@ -1,0 +1,172 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Studio1 Design's Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="">
+    <header class="flex justify-between items-center p-4 bg-black">
+      <div class="flex items-center" style="margin-left: 25px">
+        <img
+          alt="Institute of Reading Development Logo"
+          class="h-11"
+          style="height: 60px; width: 60px"
+          src="images-removebg-preview.png"
+        />
+      </div>
+
+      <div class="flex items-center space-x-4 bg-black">
+        <a class="bg-pink-500 text-white px-4 py-2 rounded-full" href="#">
+          Animation
+        </a>
+      </div>
+    </header>
+    <main class="text-center py-16 bg-black text-white">
+      <h1 class="text-4xl md:text-5xl font-bold">
+        File Conversion and PDF Tools and Animation
+      </h1>
+      <h2 class="text-3xl font-bold mb-4">PNG to PDF Converter</h2>
+      <p class="mb-8">
+        Need to turn your PNG images into a professional PDF document? You're in
+        the right place!
+      </p>
+    </main>
+    <section class="bg-black text-white py-6">
+      <div class="flex flex-wrap justify-cente r space-x-2">
+        <button
+          class="bg-white text-black border border-pink-500 px-10 py-2 rounded-full"
+        >
+          Home
+        </button>
+        <button
+          class="bg-black text-white border border-pink-500 px-10 py-2 rounded-full"
+        >
+          <a href="PDFtoDOC.html">PDF to DOC</a>
+        </button>
+        <button
+          class="bg-dark text-white border border-pink-500 px-4 py-2 rounded-full"
+        >
+          <a href="DOCtoPDF.html">DOC to PDF</a>
+        </button>
+
+        <button
+          class="bg-black text-white border border-pink-500 px-4 py-2 rounded-full"
+        >
+          <a href="PDFtoJPG.html"> PDF to JPG</a>
+        </button>
+
+        <button
+          class="bg-black text-white border border-pink-500 px-4 py-2 rounded-full"
+        >
+          <a href="PNG to PDF.html">PNG to PDF</a>
+        </button>
+        <button
+          class="bg-black text-white border border-pink-500 px-4 py-2 rounded-full"
+        >
+          <a href="Combine PDF.html">Conbine PDF</a>
+        </button>
+      </div>
+    </section>
+    <div class="container mx-auto p-4">
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <h1 class="text-2xl font-bold mb-4 text-center">
+          PNG to PDF Converter
+        </h1>
+        <form id="uploadForm" class="space-y-4">
+          <div class="flex flex-col items-center">
+            <label
+              for="fileInput"
+              class="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+            >
+              <i class="fas fa-upload mr-2"></i>Upload PNG Files
+            </label>
+            <input
+              type="file"
+              id="fileInput"
+              accept="image/png"
+              multiple
+              class="hidden"
+            />
+          </div>
+          <div
+            id="fileList"
+            class="flex flex-wrap justify-center space-x-4 space-y-4 mt-4"
+          >
+            <!-- Uploaded images will be displayed here -->
+          </div>
+          <div class="text-center">
+            <button
+              type="button"
+              id="convertButton"
+              class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
+            >
+              <i class="fas fa-file-pdf mr-2"></i>Convert to PDF
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      const fileInput = document.getElementById("fileInput");
+      const fileList = document.getElementById("fileList");
+      const convertButton = document.getElementById("convertButton");
+
+      fileInput.addEventListener("change", () => {
+        fileList.innerHTML = "";
+        Array.from(fileInput.files).forEach((file) => {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const img = document.createElement("img");
+            img.src = e.target.result;
+            img.alt = "Uploaded PNG file preview";
+            img.className = "w-32 h-32 object-cover rounded-md shadow-md";
+            fileList.appendChild(img);
+          };
+          reader.readAsDataURL(file);
+        });
+      });
+
+      convertButton.addEventListener("click", () => {
+        // Conversion logic will be implemented here
+        alert("Conversion to PDF is not implemented yet.");
+      });
+    </script>
+
+    <div class="max-w-2xl mx-auto p-4" style="margin-bottom: 100px">
+      <h1 class="text-2xl font-bold mb-4">Convert PNG to PDF with Ease</h1>
+      <p class="mb-4">
+        Need to turn your PNG images into a professional PDF document? You're in
+        the right place! With our PNG to PDF converter, you can:
+      </p>
+      <ul class="list-disc list-inside mb-4">
+        <li>
+          <strong>Fast Conversion:</strong> Upload your PNG file, and download a
+          PDF in seconds.
+        </li>
+        <li>
+          <strong>High Quality:</strong> Ensure your images are perfectly
+          preserved in the PDF format.
+        </li>
+        <li>
+          <strong>Secure & Private:</strong> Your files are handled with utmost
+          care and never stored on our servers.
+        </li>
+      </ul>
+      <h2 class="text-xl font-semibold mb-2">How to Convert PNG to PDF:</h2>
+      <ol class="list-decimal list-inside">
+        <li class="mb-2">
+          Click on the <strong>"Choose File"</strong> button to upload your PNG
+          image.
+        </li>
+        <li class="mb-2">Hit the <strong>"Convert to PDF"</strong> button.</li>
+        <li class="mb-2">Download your new PDF file instantly!</li>
+      </ol>
+    </div>
+  </body>
+</html>

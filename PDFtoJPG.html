@@ -1,0 +1,103 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Studio1 Design's Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="">
+    <header class="flex justify-between items-center p-4 bg-black">
+      <div class="flex items-center" style="margin-left: 25px">
+        <img
+          alt="Institute of Reading Development Logo"
+          class="h-11"
+          style="height: 60px; width: 60px"
+          src="images-removebg-preview.png"
+        />
+      </div>
+
+      <div class="flex items-center space-x-4 bg-black">
+        <a class="bg-pink-500 text-white px-4 py-2 rounded-full" href="#">
+          Animation
+        </a>
+      </div>
+    </header>
+    <main class="text-center py-16 bg-black text-white">
+      <h1 class="text-4xl md:text-5xl font-bold">
+        File Conversion and PDF Tools and Animation
+      </h1>
+      <h2 class="text-3xl font-bold mb-4">Convert PDF to JPG</h2>
+      <p class="mb-8">Easily convert your PDF files to jpg</p>
+    </main>
+    <section class="bg-black text-white py-6">
+      <div class="flex flex-wrap justify-center space-x-2">
+        <button
+          class="bg-white text-black border border-pink-500 px-10 py-2 rounded-full"
+        >
+          Home
+        </button>
+        <button
+          class="bg-black text-white border border-pink-500 px-10 py-2 rounded-full"
+        >
+          <a href="PDFtoDOC.html">PDF to DOC</a>
+        </button>
+        <button
+          class="bg-dark text-white border border-pink-500 px-4 py-2 rounded-full"
+        >
+          <a href="DOCtoPDF.html">DOC to PDF</a>
+        </button>
+
+        <button
+          class="bg-black text-white border border-pink-500 px-4 py-2 rounded-full"
+        >
+          <a href="PDFtoJPG.html"> PDF to JPG</a>
+        </button>
+
+        <button
+          class="bg-black text-white border border-pink-500 px-4 py-2 rounded-full"
+        >
+          <a href="PNG to PDF.html">PNG to PDF</a>
+        </button>
+        <button
+          class="bg-black text-white border border-pink-500 px-4 py-2 rounded-full"
+        >
+          <a href="Combine PDF.html">Conbine PDF</a>
+        </button>
+      </div>
+    </section>
+    <main class="container mx-auto mt-10 p-4 bg-white shadow-md rounded-lg">
+      <h2 class="text-3xl font-bold text-center mb-6">Convert PDF to JPG</h2>
+      <form class="space-y-4">
+        <div class="flex flex-col items-center">
+          <label for="pdfFile" class="text-lg font-semibold mb-2"
+            >Upload PDF File</label
+          >
+          <input
+            type="file"
+            id="pdfFile"
+            class="border border-gray-300 p-2 rounded-lg"
+            accept="application/pdf"
+          />
+        </div>
+        <div class="flex justify-center">
+          <button
+            type="submit"
+            class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
+          >
+            Convert
+          </button>
+        </div>
+      </form>
+    </main>
+
+    <footer class="bg-gray-800 text-white p-4 mt-10">
+      <div class="container mx-auto text-center">
+        <p>&copy; 2023 PDF to JPG Converter. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>
