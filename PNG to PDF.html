@@ -170,3 +170,74 @@
     </div>
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to PDF Converter</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Image to PDF Converter</h1>
+        <input type="file" id="imageInput" accept="image/*">
+        <button id="convertButton">Convert to PDF</button>
+        <div id="imagePreview" style="display: none;">
+            <h2>Image Preview:</h2>
+            <img id="preview" src="" alt="Image Preview" />
+        </div>
+    </div>
+
+    <script>document.getElementById('imageInput').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+              const img = document.getElementById('preview');
+              img.src = e.target.result;
+              document.getElementById('imagePreview').style.display = 'block';
+          }
+          reader.readAsDataURL(file);
+      }
+  });
+  
+  document.getElementById('convertButton').addEventListener('click', function() {
+      const img = document.getElementById('preview');
+      const pdf = new jsPDF();
+      
+      html2canvas(img).then(function(canvas) {
+          const imgData = canvas.toDataURL('image/png');
+          const imgWidth = 190; // Set the width of the image in PDF
+          const pageHeight = pdf.internal.pageSize.height;
+          const imgHeight = (canvas.height * imgWidth) / canvas.width;
+          let heightLeft = imgHeight;
+  
+          let position = 0;
+  
+          pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+          heightLeft -= pageHeight;
+  
+          while (heightLeft >= 0) {
+              position = heightLeft - imgHeight;
+              pdf.addPage();
+              pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+              heightLeft -= pageHeight;
+          }
+  
+          pdf.save('download.pdf');
+      });
+  });</script>
+</body>
+</html>

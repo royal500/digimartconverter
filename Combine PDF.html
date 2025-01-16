@@ -46,9 +46,9 @@
           Home
         </button>
         <button
-          class="bg-white text-dark border border-pink-500 px-4 py-2 rounded-full"
+          class="bg-white text-black border border-pink-500 px-4 py-2 rounded-full"
         >
-          <a href="Combine PDF.html">Conbine PDF</a>
+          <a href="Combine PDF.html">Combine PDF</a>
         </button>
         <button
           class="bg-black text-white border border-pink-500 px-10 py-2 rounded-full"
@@ -78,26 +78,91 @@
     <main class="container mx-auto p-4">
       <section class="bg-white p-6 rounded shadow-md">
         <h2 class="text-xl font-bold mb-4">Combine PDF or Image Files</h2>
-        <form class="space-y-4">
-          <div>
-            <label for="files" class="block text-sm font-medium text-gray-700"
-              >Upload Files</label
-            >
-            <input
-              type="file"
-              id="files"
-              name="files"
-              multiple
-              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            />
+
+        <div class="container mx-auto p-4">
+          <div class="bg-white shadow-md rounded-lg p-6">
+            <h1 class="text-2xl font-bold mb-4">
+              Convert Multiple PDF/Images to a Single PDF
+            </h1>
+            <form id="upload-form" class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700"
+                  >Upload PDF/Images</label
+                >
+                <input
+                  type="file"
+                  id="file-input"
+                  class="mt-1 block w-full"
+                  accept=".pdf, image/*"
+                  multiple
+                />
+              </div>
+              <button
+                type="button"
+                id="convert-btn"
+                class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+              >
+                Convert to Single PDF
+              </button>
+            </form>
+            <div id="download-section" class="mt-4 hidden">
+              <a
+                id="download-link"
+                href="#"
+                class="w-full bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 text-center block"
+              >
+                Download PDF
+              </a>
+            </div>
           </div>
-          <button
-            type="submit"
-            class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
-          >
-            Combine Files
-          </button>
-        </form>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+        <script>
+          document
+            .getElementById("convert-btn")
+            .addEventListener("click", async () => {
+              const fileInput = document.getElementById("file-input");
+              const files = fileInput.files;
+              if (files.length === 0) {
+                alert("Please upload at least one file.");
+                return;
+              }
+
+              const pdfDoc = await PDFLib.PDFDocument.create();
+              for (const file of files) {
+                const arrayBuffer = await file.arrayBuffer();
+                if (file.type === "application/pdf") {
+                  const pdf = await PDFLib.PDFDocument.load(arrayBuffer);
+                  const copiedPages = await pdfDoc.copyPages(
+                    pdf,
+                    pdf.getPageIndices()
+                  );
+                  copiedPages.forEach((page) => pdfDoc.addPage(page));
+                } else if (file.type.startsWith("image/")) {
+                  const img = await pdfDoc.embedJpg(arrayBuffer);
+                  const page = pdfDoc.addPage([img.width, img.height]);
+                  page.drawImage(img, {
+                    x: 0,
+                    y: 0,
+                    width: img.width,
+                    height: img.height,
+                  });
+                }
+              }
+
+              const pdfBytes = await pdfDoc.save();
+              const blob = new Blob([pdfBytes], { type: "application/pdf" });
+              const url = URL.createObjectURL(blob);
+
+              const downloadLink = document.getElementById("download-link");
+              downloadLink.href = url;
+              downloadLink.download = "merged.pdf";
+              document
+                .getElementById("download-section")
+                .classList.remove("hidden");
+            });
+        </script>
       </section>
 
       <section class="mt-8 bg-white p-6 rounded shadow-md">

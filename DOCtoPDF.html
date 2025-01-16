@@ -73,20 +73,38 @@
       </div>
     </section>
     
-           <div class="bg-white p-6 rounded-lg shadow-lg">
-            <form class="space-y-4">
-             <div>
-              <label class="block text-left font-medium" for="file-upload">
-               Upload Document
-              </label>
-              <input class="mt-1 block w-full border border-gray-300 rounded-md p-2" id="file-upload" type="file"/>
-             </div>
-             <button class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700" type="submit">
-              Convert to PDF
-             </button>
-            </form>
-           </div>
-          </section>
+    <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Document to PDF Converter</title>
+          <script src="https://cdn.tailwindcss.com"></script>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+          <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+      </head>
+      <body class="bg-gray-100 font-roboto">
+          <div class="container mx-auto p-4">
+              <div class="bg-white shadow-md rounded-lg p-6">
+                  <h1 class="text-2xl font-bold mb-4">Document to PDF Converter</h1>
+                  <textarea id="documentContent" class="w-full h-64 p-2 border border-gray-300 rounded mb-4" placeholder="Enter your document content here..."></textarea>
+                  <button id="convertBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                      <i class="fas fa-file-pdf"></i> Convert to PDF
+                  </button>
+              </div>
+          </div>
+      
+          <script>
+              document.getElementById('convertBtn').addEventListener('click', function () {
+                  const { jsPDF } = window.jspdf;
+                  const doc = new jsPDF();
+                  const content = document.getElementById('documentContent').value;
+                  doc.text(content, 10, 10);
+                  doc.save('document.pdf');
+              });
+          </script>
+      </body>
+      </html>
           <section class="mt-16">
            <h2 class="text-2xl font-bold mb-4">
             How It Works
