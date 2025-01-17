@@ -36,107 +36,55 @@
         the right place!
       </p>
     </main>
-    <section class="bg-black text-white py-6">
-      <div class="flex flex-wrap justify-cente r space-x-2">
-        <button
-          class="bg-white text-black border border-pink-500 px-10 py-2 rounded-full"
-        >
-          Home
-        </button>
-        <button
-          class="bg-black text-white border border-pink-500 px-10 py-2 rounded-full"
-        >
-          <a href="PDFtoDOC.html">PDF to DOC</a>
-        </button>
-        <button
-          class="bg-dark text-white border border-pink-500 px-4 py-2 rounded-full"
-        >
-          <a href="DOCtoPDF.html">DOC to PDF</a>
-        </button>
-
-        <button
-          class="bg-black text-white border border-pink-500 px-4 py-2 rounded-full"
-        >
-          <a href="PDFtoJPG.html"> PDF to JPG</a>
-        </button>
-
-        <button
-          class="bg-black text-white border border-pink-500 px-4 py-2 rounded-full"
-        >
-          <a href="PNG to PDF.html">PNG to PDF</a>
-        </button>
-        <button
-          class="bg-black text-white border border-pink-500 px-4 py-2 rounded-full"
-        >
-          <a href="Combine PDF.html">Conbine PDF</a>
-        </button>
-      </div>
+    
+    <section></section>    
     </section>
-    <div class="container mx-auto p-4">
-      <div class="bg-white shadow-md rounded-lg p-6">
-        <h1 class="text-2xl font-bold mb-4 text-center">
-          PNG to PDF Converter
-        </h1>
-        <form id="uploadForm" class="space-y-4">
-          <div class="flex flex-col items-center">
-            <label
-              for="fileInput"
-              class="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-            >
-              <i class="fas fa-upload mr-2"></i>Upload PNG Files
-            </label>
-            <input
-              type="file"
-              id="fileInput"
-              accept="image/png"
-              multiple
-              class="hidden"
-            />
+  
+          <div class="container mx-auto p-4">
+              <div class="bg-white shadow-md rounded-lg p-6">
+                  <h1 class="text-2xl font-bold mb-4">PNG to PDF Converter</h1>
+                  <div class="mb-4">
+                      <label class="block text-gray-700 text-sm font-bold mb-2" for="fileInput">Upload PNG Image</label>
+                      <input type="file" id="fileInput" accept="image/png" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                  </div>
+                  <button id="convertBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                      Convert to PDF
+                  </button>
+              </div>
           </div>
-          <div
-            id="fileList"
-            class="flex flex-wrap justify-center space-x-4 space-y-4 mt-4"
-          >
-            <!-- Uploaded images will be displayed here -->
-          </div>
-          <div class="text-center">
-            <button
-              type="button"
-              id="convertButton"
-              class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
-            >
-              <i class="fas fa-file-pdf mr-2"></i>Convert to PDF
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <script>
-      const fileInput = document.getElementById("fileInput");
-      const fileList = document.getElementById("fileList");
-      const convertButton = document.getElementById("convertButton");
-
-      fileInput.addEventListener("change", () => {
-        fileList.innerHTML = "";
-        Array.from(fileInput.files).forEach((file) => {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            const img = document.createElement("img");
-            img.src = e.target.result;
-            img.alt = "Uploaded PNG file preview";
-            img.className = "w-32 h-32 object-cover rounded-md shadow-md";
-            fileList.appendChild(img);
-          };
-          reader.readAsDataURL(file);
-        });
-      });
-
-      convertButton.addEventListener("click", () => {
-        // Conversion logic will be implemented here
-        alert("Conversion to PDF is not implemented yet.");
-      });
-    </script>
+      
+          <script>
+              document.getElementById('convertBtn').addEventListener('click', function() {
+                  const fileInput = document.getElementById('fileInput');
+                  if (fileInput.files.length === 0) {
+                      alert('Please select a PNG file first.');
+                      return;
+                  }
+      
+                  const file = fileInput.files[0];
+                  const reader = new FileReader();
+      
+                  reader.onload = function(event) {
+                      const img = new Image();
+                      img.src = event.target.result;
+      
+                      img.onload = function() {
+                          const { jsPDF } = window.jspdf;
+                          const pdf = new jsPDF({
+                              orientation: 'landscape',
+                              unit: 'px',
+                              format: [img.width, img.height]
+                          });
+      
+                          pdf.addImage(img, 'PNG', 0, 0, img.width, img.height);
+                          pdf.save('converted.pdf');
+                      };
+                  };
+      
+                  reader.readAsDataURL(file);
+              });
+          </script>
+     
 
     <div class="max-w-2xl mx-auto p-4" style="margin-bottom: 100px">
       <h1 class="text-2xl font-bold mb-4">Convert PNG to PDF with Ease</h1>
@@ -178,66 +126,3 @@
 
 
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image to PDF Converter</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
-</head>
-<body>
-    <div class="container">
-        <h1>Image to PDF Converter</h1>
-        <input type="file" id="imageInput" accept="image/*">
-        <button id="convertButton">Convert to PDF</button>
-        <div id="imagePreview" style="display: none;">
-            <h2>Image Preview:</h2>
-            <img id="preview" src="" alt="Image Preview" />
-        </div>
-    </div>
-
-    <script>document.getElementById('imageInput').addEventListener('change', function(event) {
-      const file = event.target.files[0];
-      if (file) {
-          const reader = new FileReader();
-          reader.onload = function(e) {
-              const img = document.getElementById('preview');
-              img.src = e.target.result;
-              document.getElementById('imagePreview').style.display = 'block';
-          }
-          reader.readAsDataURL(file);
-      }
-  });
-  
-  document.getElementById('convertButton').addEventListener('click', function() {
-      const img = document.getElementById('preview');
-      const pdf = new jsPDF();
-      
-      html2canvas(img).then(function(canvas) {
-          const imgData = canvas.toDataURL('image/png');
-          const imgWidth = 190; // Set the width of the image in PDF
-          const pageHeight = pdf.internal.pageSize.height;
-          const imgHeight = (canvas.height * imgWidth) / canvas.width;
-          let heightLeft = imgHeight;
-  
-          let position = 0;
-  
-          pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
-          heightLeft -= pageHeight;
-  
-          while (heightLeft >= 0) {
-              position = heightLeft - imgHeight;
-              pdf.addPage();
-              pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
-              heightLeft -= pageHeight;
-          }
-  
-          pdf.save('download.pdf');
-      });
-  });</script>
-</body>
-</html>
